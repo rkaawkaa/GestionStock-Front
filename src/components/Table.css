@@ -1,0 +1,10 @@
+.MuiPaper-root {
+    max-width: 95%;
+    min-width: 50%;
+    width: auto !important;
+}
+
+.MuiPaper-root {
+    margin-bottom: 20px !important;
+}
+

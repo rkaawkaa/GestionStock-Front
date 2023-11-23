@@ -1,0 +1,54 @@
+# on définit quelques variables générales
+variables:
+  CI_REGISTRY: forge-registry.iut-larochelle.fr
+  HARBOR_PROJECT: lp-dwcs-2022-23-groupe-3
+  K8S_NAMESPACE: kiosquiut-front-groupe-3
+  KUBE_CONTEXT: k8s-iut-info/kubeagent:gitlabagentiut # contexte de l'agent k8s GitLab
+  BUILD_IMAGE: front-kiosquiut
+
+stages:
+  - registry-update
+  - deploy
+  
+# on élabore un template de job
+.registry-update-template: &registryUpdateTemplate
+  stage: registry-update
+  tags :
+    - docker
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+  script:
+    # Build and tag the image
+    - docker build -t $CI_REGISTRY/$HARBOR_PROJECT/$BUILD_IMAGE:${CI_COMMIT_SHORT_SHA} -f $BUILD_DOCKERFILE $BUILD_CONTEXT
+    # Log into the registry
+    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_TOKEN $CI_REGISTRY
+    # Push the image
+    - docker push $CI_REGISTRY/$HARBOR_PROJECT/$BUILD_IMAGE:${CI_COMMIT_SHORT_SHA}
+
+# on utilise le template défini précédemment
+registry-update-front:
+  <<: *registryUpdateTemplate
+  variables:
+    BUILD_DOCKERFILE: ci/Dockerfile
+    BUILD_CONTEXT: .
+
+k8sdeploy:
+  stage: deploy
+  before_script:
+    - if [ -n "$KUBE_CONTEXT" ]; then kubectl config use-context "$KUBE_CONTEXT"; fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH # on veut une exécution uniquement sur la branche par défaut (main)
+  image:
+    name: thisiskj/kubectl-envsubst # une image qui sait faire des substitutions de variables dans les fichiers yaml
+    entrypoint: [""]
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    BUILD_IMAGE_DWCS_PROJET: $CI_REGISTRY/$HARBOR_PROJECT/$BUILD_IMAGE:${CI_COMMIT_SHORT_SHA}
+    BUILD_TARGET: prod
+  script:
+    - if ! kubectl get ns | grep $K8S_NAMESPACE ; then kubectl create namespace $K8S_NAMESPACE ; fi
+    - kubectl delete --ignore-not-found=true secret gitlab-auth --namespace=$K8S_NAMESPACE
+    - kubectl create secret docker-registry gitlab-auth --docker-server=$CI_REGISTRY --docker-username=$DOCKER_REGISTRY_USER --docker-password=$DOCKER_REGISTRY_TOKEN --namespace=$K8S_NAMESPACE
+    - cat k8s/deployment.yaml | envsubst | kubectl apply -f - --namespace=$K8S_NAMESPACE
+    - cat k8s/service.yaml | envsubst | kubectl apply -f - --namespace=$K8S_NAMESPACE
+    - cat k8s/ingress.yaml | envsubst | kubectl apply -f - --namespace=$K8S_NAMESPACE

@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: "Black";   /*Can be any text*/
+  src: local("Montserrat-Black"),
+    url("./fonts/Montserrat-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ExtraBold";   /*Can be any text*/
+  src: local("Montserrat-ExtraBold"),
+    url("./fonts/Montserrat-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bold";   /*Can be any text*/
+  src: local("Montserrat-Bold"),
+    url("./fonts/Montserrat-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SemiBold";   /*Can be any text*/
+  src: local("Montserrat-SemiBold"),
+    url("./fonts/Montserrat-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Medium";   /*Can be any text*/
+  src: local("Montserrat-Medium"),
+    url("./fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Regular";   /*Can be any text*/
+  src: local("Montserrat-Regular"),
+    url("./fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Light";   /*Can be any text*/
+  src: local("Montserrat-Light"),
+    url("./fonts/Montserrat-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ExtraLight";   /*Can be any text*/
+  src: local("Montserrat-ExtraLight"),
+    url("./fonts/Montserrat-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Thin";   /*Can be any text*/
+  src: local("Montserrat-Thin"),
+    url("./fonts/Montserrat-Thin.ttf") format("truetype");
+}

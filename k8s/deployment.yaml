@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiosquiut-front-groupe-3-pod
+  namespace: $K8S_NAMESPACE
+  labels:
+    app: kiosquiut-front-groupe-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kiosquiut-front-groupe-3
+
+  template:
+    metadata:
+      labels:
+        app: kiosquiut-front-groupe-3
+    spec:
+      containers:
+        - image: $BUILD_IMAGE_DWCS_PROJET
+          name: nginx
+
+      imagePullSecrets:
+        - name: gitlab-auth

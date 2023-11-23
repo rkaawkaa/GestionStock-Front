@@ -1,0 +1,47 @@
+.borrow-container {
+    max-width: 740px !important;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 260px !important;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+.cancel-button {
+    background-color:  var(--red) !important;
+}
+
+h1 {
+    margin: 0 0 15px 0;
+}
+
+
+.borrower-infos {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .state-infos {
+        max-width: 95%;
+        min-width: none;
+    }
+    .borrow-container {
+        box-shadow: 0 0 0 0 !important;
+        padding: 10px;
+        margin: 0;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+    .state-infos {
+        margin-left: 16px;
+    }
+}

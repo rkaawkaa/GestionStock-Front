@@ -1,0 +1,18 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: dwcs-front-groupe-3-ingress
+  namespace: $K8S_NAMESPACE
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kiosquiut-front-groupe-3.k8s.iut-larochelle.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kiosquiut-front-groupe-3-ip-service
+                port:
+                  number: 80

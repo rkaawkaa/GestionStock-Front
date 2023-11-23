@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0 20px 0;
+  justify-content: flex-end;
+  width: auto;
+}
+
+.label-text {
+  font-size: 15px;
+  color: var(--dark-grey);
+  margin-right: 10px;
+  font-weight: bold;
+}
+.required {
+  color: var(--red);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column !important;
+  }
+}
+  

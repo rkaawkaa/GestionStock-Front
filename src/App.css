@@ -1,0 +1,31 @@
+.App {
+    text-align: center;
+    background-color: #EDF2F4;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Regular, serif !important;
+}
+
+h1 {
+    margin: 1em;
+    font-family: ExtraBold, Serif, serif;
+    margin-bottom: 20px;
+}
+
+.main-title {
+    margin-top: 20px !important;
+}
+
+.no-material {
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-family: SemiBold, Serif, Serif;
+    margin-bottom: 15px;
+    font-size: 24px;
+}

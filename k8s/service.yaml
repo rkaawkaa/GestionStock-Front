@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiosquiut-front-groupe-3-ip-service
+  namespace: $K8S_NAMESPACE
+spec:
+  type: ClusterIP
+  selector:
+    app: kiosquiut-front-groupe-3
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
